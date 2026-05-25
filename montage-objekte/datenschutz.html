@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Datenschutzerklärung — Montage & Objekte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<link rel="stylesheet" href="css/animations.css"/>
+<style>
+.legal-page { max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
+.legal-page h1 { margin-bottom: 2.5rem; }
+.legal-page h2 { margin: 2rem 0 0.75rem; font-size: 1.2rem; }
+.legal-page p, .legal-page address { color: var(--gray); font-style: normal; line-height: 1.8; margin-bottom: 0.75rem; }
+</style>
+</head>
+<body>
+<div class="scroll-progress"></div>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">
+    <img src="assets/logo.png" alt="Logo"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Startseite</a></li>
+    <li><a href="montage/index.html">Montage</a></li>
+    <li><a href="objekte/index.html">Objekte</a></li>
+  </ul>
+  <button class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-menu-close" onclick="closeMobile()">✕</button>
+  <a href="index.html" onclick="closeMobile()">Startseite</a>
+  <a href="montage/index.html" onclick="closeMobile()">Montage</a>
+  <a href="objekte/index.html" onclick="closeMobile()">Objekte</a>
+</div>
+
+<div class="legal-page">
+  <h1>Datenschutzerklärung</h1>
+
+  <h2>1. Datenschutz auf einen Blick</h2>
+  <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+
+  <h2>2. Verantwortliche Stelle</h2>
+  <address>
+    Montage &amp; Objekte — Alexander Reinhardt<br/>
+    Domacker 12, 55743 Idar-Oberstein<br/>
+    E-Mail: info@montage-objekte.de<br/>
+    Telefon: +49 171 5191250
+  </address>
+
+  <h2>3. Datenerfassung auf dieser Website</h2>
+  <p><strong>Kontaktformular:</strong> Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+  <p><strong>Server-Log-Dateien:</strong> Der Provider dieser Website erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Diese Daten sind nicht bestimmten Personen zuordenbar und es erfolgt keine Zusammenführung dieser Daten mit anderen Datenquellen.</p>
+
+  <h2>4. Ihre Rechte</h2>
+  <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen.</p>
+  <p>Bei Fragen zum Datenschutz wenden Sie sich bitte an: info@montage-objekte.de</p>
+
+  <h2>5. Hosting</h2>
+  <p>Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. [Platzhalter — Hosting-Anbieter bitte ergänzen.]</p>
+
+  <p style="margin-top:3rem;font-size:0.85rem">Stand: Mai 2026 — Diese Datenschutzerklärung ist ein Platzhalter und muss vor dem Live-Gang durch einen rechtlich geprüften Text ersetzt werden.</p>
+</div>
+
+<footer class="index-footer">
+  <div class="index-footer-logo">
+    <a href="index.html"><img src="assets/logo.png" alt="Logo"/></a>
+  </div>
+  <span style="font-size:0.82rem">© 2026 Montage & Objekte. Alle Rechte vorbehalten.</span>
+  <div class="index-footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutzerklärung</a>
+    <a href="montage/kontakt.html">Kontakt</a>
+  </div>
+</footer>
+<script>
+function openMobile() { document.getElementById('mobile-menu').classList.add('open'); }
+function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

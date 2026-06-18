@@ -23,12 +23,28 @@ if (bar) {
   }, { passive: true });
 }
 
-// ── Nav Shrink on Scroll ──
+// ── Nav Shrink on Scroll (mit Hysterese gegen Flackern) ──
+// Die Nav ist sticky und schrumpft beim Scrollen (86px -> 58px). Dieser
+// Höhensprung verkürzt die Seite und kann die Scroll-Position über eine
+// einzelne Schwelle zurückschieben -> Endlos-Toggle. Zwei Schwellen mit
+// Pufferzone (40..90 = 50px > 28px Höhendifferenz) verhindern das.
 const nav = document.querySelector('.nav');
 if (nav) {
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+  const SHRINK_AT = 90; // 'scrolled' aktivieren, sobald weiter unten
+  const GROW_AT = 40;   // 'scrolled' erst wieder lösen, wenn nahe oben
+  let shrunk = false;
+  const updateNav = () => {
+    const y = window.scrollY;
+    if (!shrunk && y > SHRINK_AT) {
+      shrunk = true;
+      nav.classList.add('scrolled');
+    } else if (shrunk && y < GROW_AT) {
+      shrunk = false;
+      nav.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
 }
 
 // ── Button Ripple ──

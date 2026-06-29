@@ -112,29 +112,36 @@
           <div class="form-row">
             <div class="form-group">
               <label>Name <span class="form-required">*</span></label>
-              <input type="text" placeholder="Ihr vollständiger Name" required/>
+              <input type="text" name="name" placeholder="Ihr vollständiger Name" required/>
             </div>
             <div class="form-group">
               <label>E-Mail <span class="form-required">*</span></label>
-              <input type="email" placeholder="ihre@email.de" required/>
+              <input type="email" name="email" placeholder="ihre@email.de" required/>
             </div>
           </div>
           <div class="form-group">
             <label>Bereich / Betreff</label>
-            <select>
-              <option value="montage" selected>Montage</option>
-              <option value="schwerlastregale">Schwerlastregale</option>
-              <option value="technische-anlagen">Technische Anlagen</option>
-              <option value="sonstiges">Sonstiges</option>
+            <select name="subject">
+              <option value="Montage" selected>Montage</option>
+              <option value="Schwerlastregale">Schwerlastregale</option>
+              <option value="Technische Anlagen">Technische Anlagen</option>
+              <option value="Sonstiges">Sonstiges</option>
             </select>
           </div>
           <div class="form-group">
             <label>Nachricht <span class="form-required">*</span></label>
-            <textarea placeholder="Beschreiben Sie Ihr Vorhaben, den Montageort, den Umfang und Ihre zeitlichen Vorstellungen..." required></textarea>
+            <textarea name="message" placeholder="Beschreiben Sie Ihr Vorhaben, den Montageort, den Umfang und Ihre zeitlichen Vorstellungen..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-teal" style="width:100%;justify-content:center;font-size:1rem;padding:0.9rem;">
+          <!-- Spam-Schutz (Honeypot): für Menschen unsichtbar -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"/>
+          <label class="form-consent">
+            <input type="checkbox" required/>
+            <span>Ich habe die <a href="../datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. <span class="form-required">*</span></span>
+          </label>
+          <button type="submit" class="btn btn-teal" style="width:100%;justify-content:center;font-size:1rem;padding:0.9rem;margin-top:1.25rem;">
             Nachricht senden →
           </button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -188,10 +195,39 @@
 <script>
 function openMobile() { document.getElementById('mobile-menu').classList.add('open'); }
 function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  alert('Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns bald bei Ihnen.');
-  e.target.reset();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  const status = form.querySelector('#form-status');
+  const data = Object.fromEntries(new FormData(form).entries());
+  if (data._gotcha) return; // Bot
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Wird gesendet …';
+  if (status) { status.textContent = ''; status.className = 'form-status'; }
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || !json.ok) throw new Error(json.error || 'Senden fehlgeschlagen');
+    if (status) {
+      status.textContent = 'Vielen Dank! Ihre Nachricht wurde gesendet. Wir melden uns in Kürze bei Ihnen.';
+      status.classList.add('form-status-success');
+    }
+    form.reset();
+  } catch (err) {
+    if (status) {
+      status.textContent = 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie uns direkt an info@montage-objekte.de.';
+      status.classList.add('form-status-error');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
 }
 </script>
 <script src="../js/main.js"></script>

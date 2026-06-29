@@ -1,0 +1,9 @@
+{
+  "name": "montage-objekte",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website Montage & Objekte – statische Seite mit Kontaktformular-Funktion",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

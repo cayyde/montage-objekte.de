@@ -113,6 +113,29 @@
       </div>
     </div>
 
+    <!-- Wiesbaden -->
+    <div class="project-block" data-reveal="up">
+      <h2>Wiesbaden</h2>
+      <div class="project-underline underline-teal"></div>
+      <div class="carousel-wrapper" id="carousel-8">
+        <div class="carousel-track">
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 1.jpg" alt="Wiesbaden 1"/></div>
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 2.jpg" alt="Wiesbaden 2"/></div>
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 3.jpg" alt="Wiesbaden 3"/></div>
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 4.jpg" alt="Wiesbaden 4"/></div>
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 5.jpg" alt="Wiesbaden 5"/></div>
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 6.jpg" alt="Wiesbaden 6"/></div>
+          <div class="carousel-slide"><img src="../assets/referenzen/Wiesbaden 7.jpg" alt="Wiesbaden 7"/></div>
+        </div>
+        <button class="carousel-btn carousel-btn-prev" onclick="slide(8,-1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-btn carousel-btn-next" onclick="slide(8,1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
     <!-- Kaiserslautern -->
     <div class="project-block" data-reveal="up">
       <h2>Kaiserslautern</h2>
@@ -296,7 +319,7 @@
 function openMobile() { document.getElementById('mobile-menu').classList.add('open'); }
 function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
 
-const carouselStates = [0,0,0,0,0,0,0,0];
+const carouselStates = [0,0,0,0,0,0,0,0,0];
 
 function slide(idx, dir) {
   const wrapper = document.getElementById('carousel-' + idx);
